@@ -20,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/file")
+@CrossOrigin(allowedHeaders = "*")
 public class FileResource {
     public static final String DIRECTORY  = System.getProperty("user.home") + "/Downloads/upload";
 
@@ -45,7 +46,7 @@ public class FileResource {
         }
         Resource resource = new UrlResource(path.toUri());
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("File-Name", fileName);
+        httpHeaders.add("filename", fileName);
         httpHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + fileName);
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(Files.probeContentType(path)))
